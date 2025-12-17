@@ -7,6 +7,9 @@ import { scopedCSS } from 'glimmer-scoped-css/rollup';
 const isCompat = Boolean(process.env.ENABLE_COMPAT_BUILD);
 
 export default defineConfig({
+  resolve: {
+    conditions: ['developing-@cardstack/view-transitions'],
+  },
   plugins: [
     scopedCSS(),
     ...(isCompat ? [classicEmberSupport()] : []),

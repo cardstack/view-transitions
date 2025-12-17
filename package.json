@@ -14,12 +14,14 @@
   "exports": {
     ".": {
       "types": "./declarations/index.d.ts",
+      "developing-@cardstack/view-transitions": "./src/index.ts",
       "default": "./dist/index.js"
     },
     "./addon-main.js": "./addon-main.cjs",
     "./*.css": "./dist/*.css",
     "./*": {
       "types": "./declarations/*.d.ts",
+      "developing-@cardstack/view-transitions": "./src/*",
       "default": "./dist/*.js"
     }
   },

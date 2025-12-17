@@ -74,36 +74,6 @@ const ProductList = <template>
     :root {
       view-transition-name: none;
     }
-
-    ::view-transition-group(.expansion) {
-      animation-duration: 0.5s;
-      border: 1px solid black;
-      box-sizing: border-box;
-      border-radius: 10px;
-      background-color: white;
-      box-shadow: #0000007d 5px 5px 9px 0px;
-    }
-
-    ::view-transition-group(.isolated) {
-      z-index: 1;
-    }
-
-    ::view-transition-old(.expansion),
-    ::view-transition-new(.expansion) {
-      /* Prevent the default animation */
-      animation: none;
-      display: none;
-    }
-
-    ::view-transition-group(.content-swap) {
-      animation-duration: 0.5s;
-      overflow: clip;
-      clip-path: inset(0px round 10px);
-    }
-
-    ::view-transition-old(.content-swap),
-    ::view-transition-new(.content-swap) {
-    }
   </style>
 
   <ProductList @products={{products}} as |product|>
