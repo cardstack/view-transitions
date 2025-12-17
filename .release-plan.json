@@ -1,0 +1,18 @@
+{
+  "solution": {
+    "@cardstack/view-transitions": {
+      "impact": "minor",
+      "oldVersion": "0.1.0",
+      "newVersion": "0.2.0",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        }
+      ],
+      "pkgJSONPath": "./package.json"
+    }
+  },
+  "description": "## Release (2025-12-17)\n\n* @cardstack/view-transitions 0.2.0 (minor)\n\n#### :rocket: Enhancement\n* `@cardstack/view-transitions`\n  * [#2](https://github.com/cardstack/view-transitions/pull/2) setting package metadata ([@ef4](https://github.com/ef4))\n\n#### Committers: 1\n- Edward Faulkner ([@ef4](https://github.com/ef4))\n"
+}
