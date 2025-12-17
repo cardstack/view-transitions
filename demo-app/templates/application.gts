@@ -75,10 +75,6 @@ const ProductList = <template>
       view-transition-name: none;
     }
 
-    ::view-transition-group(scrim) {
-      animation-duration: 0.5s;
-    }
-
     ::view-transition-group(.expansion) {
       animation-duration: 0.5s;
       border: 1px solid black;
