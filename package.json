@@ -17,12 +17,7 @@
       "developing-@cardstack/view-transitions": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./addon-main.js": "./addon-main.cjs",
-    "./*": {
-      "types": "./declarations/*.d.ts",
-      "developing-@cardstack/view-transitions": "./src/*",
-      "default": "./dist/*.js"
-    }
+    "./addon-main.js": "./addon-main.cjs"
   },
   "files": [
     "addon-main.cjs",
