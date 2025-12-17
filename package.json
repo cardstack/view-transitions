@@ -5,7 +5,10 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cardstack/view-transitions.git"
+  },
   "license": "MIT",
   "author": "",
   "imports": {
@@ -43,9 +46,6 @@
   "dependencies": {
     "@embroider/addon-shim": "^1.8.9",
     "decorator-transforms": "^2.2.2"
-  },
-  "peerDependencies": {
-    "ember-modifier": ">= 4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -87,12 +87,17 @@
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.24.1",
     "qunit-dom": "^3.4.0",
+    "release-plan": "^0.17.0",
     "rollup": "^4.22.5",
     "testem": "^3.15.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.19.1",
     "vite": "^7.1.9"
   },
+  "peerDependencies": {
+    "ember-modifier": ">= 4.0.0"
+  },
+  "packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402",
   "ember": {
     "edition": "octane"
   },
@@ -100,6 +105,5 @@
     "version": 2,
     "type": "addon",
     "main": "addon-main.cjs"
-  },
-  "packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402"
+  }
 }
