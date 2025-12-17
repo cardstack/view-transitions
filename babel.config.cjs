@@ -30,6 +30,7 @@ module.exports = {
       {
         transforms: [
           ...(isCompat ? templateCompatSupport() : macros.templateMacros),
+          'glimmer-scoped-css/ast-transform',
         ],
       },
     ],
