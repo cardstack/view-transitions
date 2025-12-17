@@ -13,8 +13,8 @@
   },
   "exports": {
     ".": {
-      "types": "./declarations/index.d.ts",
       "developing-@cardstack/view-transitions": "./src/index.ts",
+      "types": "./declarations/index.d.ts",
       "default": "./dist/index.js"
     },
     "./addon-main.js": "./addon-main.cjs"
