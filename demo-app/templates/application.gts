@@ -7,7 +7,7 @@ import { CloseButton } from '../components/close-button.gts';
 
 const selectedProduct = animatable<Product | null>(null);
 
-const FittedTray = <template>
+const Tray = <template>
   <style scoped>
     .outer {
       border: 1px solid black;
@@ -80,12 +80,12 @@ const ProductList = <template>
       {{#if (eq product selectedProduct.current)}}
         <FittedPlaceholder />
       {{else}}
-        <FittedTray
+        <Tray
           {{on "click" (fn selectedProduct.set product)}}
           @matchId={{product.id}}
         >
           {{yield product}}
-        </FittedTray>
+        </Tray>
       {{/if}}
     {{/each}}
   </div>
@@ -191,10 +191,10 @@ const Plane = <template>
 
   {{#if selectedProduct.current}}
     <Plane @scrimClicked={{fn selectedProduct.set null}}>
-      <FittedTray @matchId={{selectedProduct.current.id}} @expanded={{true}}>
+      <Tray @matchId={{selectedProduct.current.id}} @expanded={{true}}>
         <CloseButton {{on "click" (fn selectedProduct.set null)}} />
         <selectedProduct.current.big />
-      </FittedTray>
+      </Tray>
     </Plane>
   {{/if}}
 </template>
