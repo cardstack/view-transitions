@@ -1,7 +1,7 @@
 {
   "name": "@cardstack/view-transitions",
   "version": "0.1.0",
-  "description": "The default blueprint for Embroider v2 addons.",
+  "description": "Utilities to support the View Transitions API in Ember apps",
   "keywords": [
     "ember-addon"
   ],
@@ -10,7 +10,7 @@
     "url": "git@github.com:cardstack/view-transitions.git"
   },
   "license": "MIT",
-  "author": "",
+  "author": "Edward Faulkner <edward@eaf4.com",
   "imports": {
     "#src/*": "./src/*"
   },
