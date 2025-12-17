@@ -80,6 +80,9 @@ export default defineConfig([
       },
       ember.configs.gts,
     ],
+    rules: {
+      'prefer-const': 'off',
+    },
   },
   {
     files: ['src/**/*'],

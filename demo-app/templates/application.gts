@@ -1,108 +1,11 @@
 import type { TemplateOnlyComponent } from '@ember/component/template-only';
 import { on } from '@ember/modifier';
 import { animatable, viewTransitionName } from '#src/index.ts';
-import type { ComponentLike } from '@glint/template';
 import { fn } from '@ember/helper';
-
-const images: Record<string, { default: string }> = import.meta.glob(
-  '../images/*.png',
-  { eager: true },
-);
-
-function chairImage(n: number, size: string): string {
-  return images[`../images/chair-${n}-${size}.png`]!.default;
-}
+import { type Product, products } from '../products/index.gts';
+import { CloseButton } from '../components/close-button.gts';
 
 const selectedProduct = animatable<Product | null>(null);
-
-interface Product {
-  id: number;
-  fitted: ComponentLike;
-  isolated: ComponentLike;
-}
-
-const products: Product[] = [
-  {
-    id: 0,
-    fitted: <template>
-      <style scoped>
-        img {
-          width: 362px;
-          height: 668px;
-        }
-      </style>
-      <img src={{chairImage 0 "small"}} alt="a chair" />
-    </template>,
-    isolated: <template>
-      <style scoped>
-        img {
-          width: 90vw;
-        }
-      </style>
-      <img src={{chairImage 0 "big"}} alt="a chair" />
-    </template>,
-  },
-  {
-    id: 1,
-    fitted: <template>
-      <style scoped>
-        img {
-          width: 362px;
-          height: 668px;
-        }
-      </style>
-      <img src={{chairImage 1 "small"}} alt="a chair" />
-    </template>,
-    isolated: <template>
-      <style scoped>
-        img {
-          width: 90vw;
-        }
-      </style>
-      <img src={{chairImage 1 "big"}} alt="a chair" />
-    </template>,
-  },
-  {
-    id: 2,
-    fitted: <template>
-      <style scoped>
-        img {
-          width: 362px;
-          height: 668px;
-        }
-      </style>
-      <img src={{chairImage 2 "small"}} alt="a chair" />
-    </template>,
-    isolated: <template>
-      <style scoped>
-        img {
-          width: 90vw;
-        }
-      </style>
-      <img src={{chairImage 2 "big"}} alt="a chair" />
-    </template>,
-  },
-  {
-    id: 3,
-    fitted: <template>
-      <style scoped>
-        img {
-          width: 362px;
-          height: 668px;
-        }
-      </style>
-      <img src={{chairImage 3 "small"}} alt="a chair" />
-    </template>,
-    isolated: <template>
-      <style scoped>
-        img {
-          width: 90vw;
-        }
-      </style>
-      <img src={{chairImage 3 "big"}} alt="a chair" />
-    </template>,
-  },
-];
 
 const FittedTray = <template>
   <style scoped>
@@ -111,14 +14,24 @@ const FittedTray = <template>
       border-radius: 10px;
       box-shadow: #0000007d 5px 5px 9px 0px;
       background-color: white;
-      view-transition-class: expansion;
       overflow: clip;
+      view-transition-class: expansion;
+    }
+    .expanded.outer {
+      view-transition-class: expansion isolated;
     }
     .inner {
       view-transition-class: content-swap;
     }
+    .expanded .inner {
+      view-transition-class: content-swap isolated;
+    }
   </style>
-  <div class="outer" ...attributes {{viewTransitionName "outer" @matchId}}>
+  <div
+    class="outer {{if @expanded 'expanded'}}"
+    ...attributes
+    {{viewTransitionName "outer" @matchId}}
+  >
     <div class="inner" {{viewTransitionName "inner" @matchId}}>
       {{yield}}
     </div>
@@ -126,7 +39,7 @@ const FittedTray = <template>
 </template> satisfies TemplateOnlyComponent<{
   Element: HTMLElement;
   Blocks: { default: [] };
-  Args: { matchId: string | number };
+  Args: { matchId: string | number; expanded?: boolean };
 }>;
 
 const FittedPlaceholder = <template>
@@ -147,29 +60,6 @@ const FittedPlaceholder = <template>
 </template> satisfies TemplateOnlyComponent<{
   Element: HTMLElement;
   Blocks: { default: [] };
-}>;
-
-const IsolatedTray = <template>
-  <style scoped>
-    .outer {
-      border: 1px solid black;
-      border-radius: 10px;
-      padding: 0.5rem;
-      box-shadow: #0000007d 5px 5px 9px 0px;
-      background-color: white;
-      view-transition-class: expansion isolated;
-    }
-    .inner {
-      view-transition-class: content-swap isolated;
-    }
-  </style>
-  <div class="outer" ...attributes {{viewTransitionName "outer" @matchId}}>
-    <div class="inner" {{viewTransitionName "inner" @matchId}}>{{yield}}</div>
-  </div>
-</template> satisfies TemplateOnlyComponent<{
-  Element: HTMLElement;
-  Blocks: { default: [] };
-  Args: { matchId: string | number };
 }>;
 
 function eq<T>(a: T, b: T): boolean {
@@ -249,18 +139,6 @@ const Plane = <template>
   };
 }>;
 
-const CloseButton = <template>
-  <style scoped>
-    button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: 0.5rem;
-    }
-  </style>
-  <button type="button" {{on "click" (fn selectedProduct.set null)}}>X</button>
-</template> satisfies TemplateOnlyComponent<{ Element: HTMLButtonElement }>;
-
 <template>
   <style>
     body {
@@ -308,15 +186,15 @@ const CloseButton = <template>
   </style>
 
   <ProductList @products={{products}} as |product|>
-    <product.fitted />
+    <product.small />
   </ProductList>
 
   {{#if selectedProduct.current}}
     <Plane @scrimClicked={{fn selectedProduct.set null}}>
-      <IsolatedTray @matchId={{selectedProduct.current.id}}>
-        <CloseButton />
-        <selectedProduct.current.isolated />
-      </IsolatedTray>
+      <FittedTray @matchId={{selectedProduct.current.id}} @expanded={{true}}>
+        <CloseButton {{on "click" (fn selectedProduct.set null)}} />
+        <selectedProduct.current.big />
+      </FittedTray>
     </Plane>
   {{/if}}
 </template>
